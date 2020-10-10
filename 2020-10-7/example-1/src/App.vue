@@ -1,45 +1,21 @@
 <template>
-    <div id="app">
-        <el-container>
-            <el-header class="header">
-                <Header />
-            </el-header>
-            <el-container>
-                <el-aside width="200px">
-                    <Home></Home>
-                </el-aside>
-                <el-main>
-                    <router-view></router-view>
-                </el-main>
-            </el-container>
-        </el-container>
+    <div class="app">
+        <router-view />
     </div>
 </template>
+<style lang="scss">
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
 
-<script>
-import Home from "@/components/Home";
-import Header from "@/components/Header";
-
-export default {
-    name: "App",
-    components: {
-        Home: Home,
-        Header: Header,
-    },
-};
-</script>
-
-<style>
-#app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
+.app {
+    width: 100%;
+    height: 100%;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+        "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-}
-.header {
-    background-color: #409eff;
-    color: #fff;
-    line-height: 60px;
 }
 </style>

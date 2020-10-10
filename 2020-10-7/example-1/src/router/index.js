@@ -1,19 +1,65 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import menus from '@/config/menu-config'
+import Vue from "vue";
+import Router from "vue-router";
 
-Vue.use(Router)
+import Login from "@/components/Login";
+import Index from "@/components/Index";
+import Patch from "@/components/Patch";
+import UserList from "@/components/UserList";
+import BasicContainer from "@/components/BasicContainer";
 
-var routes = []
+Vue.use(Router);
+const router = new Router({
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [
+        {
+            path: '/',
+            name: 'index',
+            showMenu: true,
+            redirect: '/index',
+            component: Index,
+            meta: {
+                icon: 'el-icon-location',
+            },
+            children: [
+                {
+                    path: '/index',
+                    name: '用户管理',
+                    component: Patch,
+                    showMenu: true,
+                    meta: {
+                        icon: 'el-icon-remove',
+                    },
+                    children: [
+                        {
+                            path: '/userList',
+                            name: '用户列表',
+                            showMenu: true,
+                            meta: {
+                                icon: 'el-icon-s-marketing',
+                            },
+                            component: UserList,
+                        }, 
+                        {
+                          path: '/BasicContainer',
+                          name: '用户列表',
+                          showMenu: true,
+                          meta: {
+                              icon: 'el-icon-s-marketing',
+                          },
+                          component: BasicContainer,
+                      },
+                    ],
+                },
+            ],
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login,
+            showMenu: false,
+        }
+    ],
+});
 
-menus.forEach((item) => {
-  item.sub.forEach((sub) => {
-    routes.push({
-      path: `/${sub.componentName}`,
-      name: sub.componentName,
-      component: () => import(`@/components/${sub.componentName}`)
-    })
-  })
-})
-
-export default new Router({ routes })
+export default router;
