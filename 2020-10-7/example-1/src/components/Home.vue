@@ -1,6 +1,6 @@
 <template>
-    <el-row class="tac">
-        <el-col :span="24">
+    <el-row class="tac" style="height: 100%">
+        <el-col :span="24" style="height: 100%">
             <el-menu
                 class="el-menu-vertical-demo"
                 router
@@ -10,6 +10,7 @@
                 background-color="#545c64"
                 text-color="#fff"
                 active-text-color="#ffd04b"
+                style="height: 100%"
             >
                 <el-submenu
                     v-for="item in menu"
