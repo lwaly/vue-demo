@@ -44,6 +44,7 @@
 import Pagination from "@/components/Pagination.vue";
 // 确认提示框组件
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
+import Store from "@/store/store";
 
 export default {
     components: {
@@ -130,6 +131,9 @@ export default {
             // 显示确定编辑的弹窗
             console.log(index);
             console.log(row);
+            console.log("###");
+            console.log(Store.state.user);   
+            console.log("###");         
         },
         handleDelete(index, row) {
             // this.$refs.dialog.visible = true;

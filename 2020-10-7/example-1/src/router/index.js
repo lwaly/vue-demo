@@ -29,6 +29,8 @@ const router = new Router({
                     showMenu: true,
                     meta: {
                         icon: 'el-icon-remove',
+                        //meta元素
+                        requireAuth: true,
                     },
                     children: [
                         {

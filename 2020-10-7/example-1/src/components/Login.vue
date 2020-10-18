@@ -51,6 +51,7 @@
 <script>
 import md5 from "js-md5";
 import api from "@/api/api";
+import Store from "@/store/store";
 
 export default {
     components: {},
@@ -97,7 +98,18 @@ export default {
                     password: md5(this.loginForm.password),
                 })
             );
-            this.$router.replace({ path: "/" });
+            api.postJSON("/MuzenBAS/User/Login", {
+                    id: this.loginForm.id,
+                    password: md5(this.loginForm.password),
+                }).then(res => {
+                    console.log(res);
+                    if (0 == res.data.code){
+                        Store.state.user = res.data.data;
+                        this.$router.replace({ path: "/" });
+                        console.log(res.data.data.token);
+                    }
+                })
+            
         },
         checkUser() {
             //校验id和密码
@@ -135,39 +147,6 @@ export default {
             }
 
             bool = true;
-            // axios({
-            //     method: "post",
-            //     url: "http://47.103.137.111:18080/MuzenBAS/User/Login",
-            //     data: {
-            //         id: this.loginForm.id,
-            //         password: md5(this.loginForm.password),
-            //     },
-            //     header: {
-            //         "Content-Type": "application/json",
-            //     },
-            // }).then((res) => {
-            //     // eslint-disable-next-line
-            //     console.log(res);
-            //     console.log(this.loginForm.id, md5(this.loginForm.password));
-            //     console.log("res2");
-            //     if (res.data.code) {
-            //         console.log("res3");
-            //         alert(res.data.data);
-            //     } else {
-            //         console.log("res4");
-            //         // this.modalName = "";
-            //         // Store.state.user = res.data.data;
-            //         // console.log("res4");
-            //         // console.log(Store.state.user);
-            //         // console.log("res5");
-            //         // this.userInfo.uid = res.data.data.id;
-            //         // this.userInfo.id = res.data.data.id;
-            //         // this.$router.push({ path: "/" });
-            //         // this.$router.go(-1);
-            //         // 把用户登录成功后的uid，保存在本地，方便浏览器去获取的位置
-            //         // localStorage.setItem('uid', this.userInfo.uid);  //使用cookie，就不需要使用这个来存储
-            //     }
-            // });
             return bool;
         },
     },
