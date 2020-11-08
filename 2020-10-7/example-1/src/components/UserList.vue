@@ -92,8 +92,6 @@
                 </template>
             </el-table-column>
         </el-table>
-        <!-- <ConfirmDialog  @confirm="confirm" :showMsg.sync="showMsg"></ConfirmDialog> -->
-        <!-- <Pagination></Pagination> -->
         <el-pagination
             @current-change="handleCurrentChange"
             :current-page="currentPage4"
@@ -106,14 +104,11 @@
 </template>
 
 <script>
-// 确认提示框组件
-import ConfirmDialog from "@/components/ConfirmDialog.vue";
 import Store from "@/store/store";
 import api from "@/api/api";
 
 export default {
     components: {
-        ConfirmDialog,
     },
     data() {
         return {
