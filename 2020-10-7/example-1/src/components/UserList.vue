@@ -1,19 +1,51 @@
 <template>
     <div class="customzie">
+        <div class="search-box">
+            <div>
+                <span>
+                    单号：
+                    <el-input
+                        clearable
+                        placeholder="请输入"
+                        size="small"
+                        style="width: 160px"
+                        v-model.number="id"
+                        type="number"
+                    >
+                    </el-input>
+                </span>
+                <el-radio-group v-model.number="sex" @change="getSex">
+                    <el-radio label="1" :name="radioname">男</el-radio>
+                    <el-radio label="2" :name="radioname">女</el-radio>
+                </el-radio-group>
+                <el-button
+                    type="primary"
+                    plain
+                    size="small"
+                    @click="UserListGet"
+                    >查询</el-button
+                >
+                <el-button type="primary" plain size="small">重置</el-button>
+            </div>
+        </div>
         <el-table :data="tableData" style="width: 100%">
             <el-table-column label="日期" align="center" width="180">
                 <template slot-scope="scope">
                     <i class="el-icon-time"></i>
-                    <span style="margin-left: 10px">{{ scope.row.date }}</span>
+                    <span style="margin-left: 10px">{{
+                        scope.row.create_time
+                    }}</span>
                 </template>
             </el-table-column>
             <el-table-column label="姓名" align="center">
                 <template slot-scope="scope">
                     <el-popover trigger="hover" placement="top">
-                        <p>姓名: {{ scope.row.name }}</p>
+                        <p>姓名: {{ scope.row.nickname }}</p>
                         <p>住址: {{ scope.row.address }}</p>
-                        <div slot="reference" class="name-wrapper">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                        <div slot="reference" class="nickname-wrapper">
+                            <el-tag size="medium">{{
+                                scope.row.nickname
+                            }}</el-tag>
                         </div>
                     </el-popover>
                 </template>
@@ -35,88 +67,37 @@
             </el-table-column>
         </el-table>
         <!-- <ConfirmDialog  @confirm="confirm" :showMsg.sync="showMsg"></ConfirmDialog> -->
-        <Pagination></Pagination>
+        <!-- <Pagination></Pagination> -->
+        <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage4"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="totalCount"
+        >
+        </el-pagination>
     </div>
 </template>
 
 <script>
-// 分页组件
-import Pagination from "@/components/Pagination.vue";
 // 确认提示框组件
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
 import Store from "@/store/store";
+import api from "@/api/api";
 
 export default {
     components: {
-        Pagination,
         ConfirmDialog,
     },
     data() {
         return {
             // 显示提示框
             showMsg: true,
-            tableData: [
-                {
-                    date: "2016-05-02",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1518 弄",
-                },
-                {
-                    date: "2016-05-04",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1517 弄",
-                },
-                {
-                    date: "2016-05-01",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1519 弄",
-                },
-                {
-                    date: "2016-05-031",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
-                },
-                {
-                    date: "2016-05-032",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
-                },
-                {
-                    date: "2016-05-033",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
-                },
-                {
-                    date: "2016-05-034",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
-                },
-                {
-                    date: "2016-05-035",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
-                },
-                {
-                    date: "2016-05-036",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
-                },
-                {
-                    date: "2016-05-037",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
-                },
-                {
-                    date: "2016-05-038",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
-                },
-                {
-                    date: "2016-05-039",
-                    name: "王小虎",
-                    address: "上海市普陀区金沙江路 1516 弄",
-                },
-            ],
+            totalCount: 1,
+            tableData: [],
+            id: "",
+            sex: "",
         };
     },
     computed: {},
@@ -132,8 +113,12 @@ export default {
             console.log(index);
             console.log(row);
             console.log("###");
-            console.log(Store.state.user);   
-            console.log("###");         
+            console.log(Store.state.user);
+            console.log("###");
+        },
+        getSex(val) {
+            this.sex = val;
+            console.log('获得的单选框值是：', val, typeof(val))
         },
         handleDelete(index, row) {
             // this.$refs.dialog.visible = true;
@@ -142,12 +127,46 @@ export default {
             console.log(index);
             console.log(row);
         },
+        UserListGet() {
+            parm = new Object();
+            parm.page_index = 1;
+            parm.page_size = 10;
+            if (0 != this.id) {
+                parm.id = this.id;
+            }
+            if (0 != this.sex) {
+                parm.sex = this.sex;
+            }
+            api.postJSON("/MuzenBAS/User/UserFind", parm).then((res) => {
+                console.log(res);
+                if (0 == res.data.code) {
+                    // Store.state.user = res.data.data;
+                    this.tableData = res.data.data.data.slice(0, 10);
+                    this.totalCount = res.data.data.count;
+                    console.log(res.data.data);
+                }
+            });
+        },
         /**
          *@description: 点击确定执行的方法
          */
         confirm() {
             // this.$refs.dialog.visible = false;
             console.log("执行确认方法");
+        },
+        handleCurrentChange(pageIndex) {
+            api.postJSON("/MuzenBAS/User/UserFind", {
+                page_index: pageIndex,
+                page_size: 10,
+            }).then((res) => {
+                console.log(res);
+                if (0 == res.data.code) {
+                    // Store.state.user = res.data.data;
+                    this.tableData = res.data.data.data.slice(0, 10);
+                    this.totalCount = res.data.data.count;
+                    console.log(res.data.data);
+                }
+            });
         },
     },
 };
@@ -157,6 +176,17 @@ export default {
     // @import '@/assets/style/table.scss';
 
     width: 100%;
-    height: vh(950);
+    height: vh(550);
+    .search-box {
+        position: relative;
+        .btn-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
+.el-pagination {
+    text-align: right;
 }
 </style>
