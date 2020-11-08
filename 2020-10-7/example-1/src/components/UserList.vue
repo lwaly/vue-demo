@@ -3,7 +3,7 @@
         <div class="search-box">
             <div>
                 <span>
-                    单号：
+                    id：
                     <el-input
                         clearable
                         placeholder="请输入"
@@ -14,10 +14,36 @@
                     >
                     </el-input>
                 </span>
-                <el-radio-group v-model.number="sex" @change="getSex">
-                    <el-radio :label="1">男</el-radio>
-                    <el-radio :label="2">女</el-radio>
-                </el-radio-group>
+                <span>
+                    性别：
+                    <el-radio-group v-model.number="sex" @change="getSex">
+                        <el-radio :label="1">男</el-radio>
+                        <el-radio :label="2">女</el-radio>
+                    </el-radio-group>
+                </span>
+                <span>
+                    登录方式：
+                    <el-checkbox
+                        v-model="loginTypeWx"
+                        label="微信"
+                    ></el-checkbox>
+                    <el-checkbox
+                        v-model="loginTypeWb"
+                        label="微博"
+                    ></el-checkbox>
+                    <el-checkbox v-model="loginTypeQq" label="qq"></el-checkbox>
+                </span>
+                <div class="block">
+                    <span class="demonstration">注册时间</span>
+                    <el-date-picker
+                        v-model="startTime"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期"
+                    >
+                    </el-date-picker>
+                </div>
                 <el-button
                     type="primary"
                     plain
@@ -69,7 +95,6 @@
         <!-- <ConfirmDialog  @confirm="confirm" :showMsg.sync="showMsg"></ConfirmDialog> -->
         <!-- <Pagination></Pagination> -->
         <el-pagination
-            @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage4"
             :page-size="10"
@@ -98,6 +123,11 @@ export default {
             tableData: [],
             id: "",
             sex: "",
+            loginTypeWx: false,
+            loginTypeWb: false,
+            loginTypeQq: false,
+            startTime:"",
+            endTime:"",
         };
     },
     computed: {},
@@ -118,7 +148,7 @@ export default {
         },
         getSex(val) {
             this.sex = val;
-            console.log('获得的单选框值是：', val, typeof(val))
+            console.log("获得的单选框值是：", val, typeof val);
         },
         handleDelete(index, row) {
             // this.$refs.dialog.visible = true;
@@ -128,15 +158,27 @@ export default {
             console.log(row);
         },
         UserListGet() {
-            parm = new Object();
-            parm.page_index = 1;
-            parm.page_size = 10;
+            var parm = { page_index: 1, page_size: 10 };
             if (0 != this.id) {
                 parm.id = this.id;
             }
             if (0 != this.sex) {
                 parm.sex = this.sex;
             }
+            if (this.loginTypeWx) {
+                parm.login_type = 1;
+            } else if (this.loginTypeWb) {
+                parm.login_type = 2;
+            } else if (this.loginTypeQq) {
+                parm.login_type = 3;
+            }
+            if (0<(new Date(this.startTime[0])).getTime() / 1000){
+                parm.start_time=(new Date(this.startTime[0])).getTime() / 1000
+            }
+            if (0<(new Date(this.startTime[1])).getTime() / 1000){
+                parm.end_time=(new Date(this.startTime[1])).getTime() / 1000
+            }
+            console.log(this.startTime,(new Date(this.startTime[0])).getTime() / 1000)
             api.postJSON("/MuzenBAS/User/UserFind", parm).then((res) => {
                 console.log(res);
                 if (0 == res.data.code) {
