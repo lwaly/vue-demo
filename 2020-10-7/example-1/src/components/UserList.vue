@@ -15,8 +15,8 @@
                     </el-input>
                 </span>
                 <el-radio-group v-model.number="sex" @change="getSex">
-                    <el-radio label="1" :name="radioname">男</el-radio>
-                    <el-radio label="2" :name="radioname">女</el-radio>
+                    <el-radio :label="1">男</el-radio>
+                    <el-radio :label="2">女</el-radio>
                 </el-radio-group>
                 <el-button
                     type="primary"
