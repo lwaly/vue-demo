@@ -30,7 +30,7 @@
                     placeholder="密码"
                     name="password"
                     tabindex="2"
-                    @keyup.enter.native="handleLogin"
+                    @keyup.enter.native="Login"
                     autocomplete="on"
                 />
                 <span class="name-icon iconfont icon-1"></span>
@@ -89,8 +89,8 @@ export default {
                 password: md5(this.loginForm.password),
             };
             da.id = this.loginForm.id;
-            console.log(typeof(this.loginForm.id));
-            console.log(typeof(da.id));
+            console.log(typeof this.loginForm.id);
+            console.log(typeof da.id);
             console.log(da);
             console.log(
                 api.postJSON("/MuzenBAS/User/Login", {
@@ -99,17 +99,17 @@ export default {
                 })
             );
             api.postJSON("/MuzenBAS/User/Login", {
-                    id: this.loginForm.id,
-                    password: md5(this.loginForm.password),
-                }).then(res => {
-                    console.log(res);
-                    if (0 == res.data.code){
-                        Store.state.user = res.data.data;
-                        this.$router.replace({ path: "/" });
-                        console.log(res.data.data.token);
-                    }
-                })
-            
+                id: this.loginForm.id,
+                password: md5(this.loginForm.password),
+            }).then((res) => {
+                console.log(res);
+                if (0 == res.data.code) {
+                    Store.state.user = res.data.data;
+                    this.$router.replace({ path: "/" });
+                    sessionStorage.setItem("token", Store.state.user.token);
+                    console.log(res.data.data.token);
+                }
+            });
         },
         checkUser() {
             //校验id和密码

@@ -94,7 +94,6 @@
         </el-table>
         <el-pagination
             @current-change="handleCurrentChange"
-            :current-page="currentPage4"
             :page-size="10"
             layout="total, sizes, prev, pager, next, jumper"
             :total="totalCount"
@@ -108,8 +107,7 @@ import Store from "@/store/store";
 import api from "@/api/api";
 
 export default {
-    components: {
-    },
+    components: {},
     data() {
         return {
             // 显示提示框
@@ -121,8 +119,8 @@ export default {
             loginTypeWx: false,
             loginTypeWb: false,
             loginTypeQq: false,
-            startTime:"",
-            endTime:"",
+            startTime: "",
+            endTime: "",
         };
     },
     computed: {},
@@ -167,13 +165,16 @@ export default {
             } else if (this.loginTypeQq) {
                 parm.login_type = 3;
             }
-            if (0<(new Date(this.startTime[0])).getTime() / 1000){
-                parm.start_time=(new Date(this.startTime[0])).getTime() / 1000
+            if (0 < new Date(this.startTime[0]).getTime() / 1000) {
+                parm.start_time = new Date(this.startTime[0]).getTime() / 1000;
             }
-            if (0<(new Date(this.startTime[1])).getTime() / 1000){
-                parm.end_time=(new Date(this.startTime[1])).getTime() / 1000
+            if (0 < new Date(this.startTime[1]).getTime() / 1000) {
+                parm.end_time = new Date(this.startTime[1]).getTime() / 1000;
             }
-            console.log(this.startTime,(new Date(this.startTime[0])).getTime() / 1000)
+            console.log(
+                this.startTime,
+                new Date(this.startTime[0]).getTime() / 1000
+            );
             api.postJSON("/MuzenBAS/User/UserFind", parm).then((res) => {
                 console.log(res);
                 if (0 == res.data.code) {

@@ -20,6 +20,7 @@ const router = new Router({
             component: Index,
             meta: {
                 icon: 'el-icon-location',
+                requireAuth: true,
             },
             children: [
                 {
@@ -39,6 +40,7 @@ const router = new Router({
                             showMenu: true,
                             meta: {
                                 icon: 'el-icon-s-marketing',
+                                requireAuth: true,
                             },
                             component: UserList,
                         }, 
@@ -48,6 +50,7 @@ const router = new Router({
                           showMenu: true,
                           meta: {
                               icon: 'el-icon-s-marketing',
+                              requireAuth: true,
                           },
                           component: BasicContainer,
                       },
