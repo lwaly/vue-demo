@@ -1,11 +1,11 @@
 <template>
-    <div id="index">
-        <el-container>
+    <div id="index" style="height: 100%">
+        <el-container style="height: 100%">
             <el-header class="header">
                 <Header />
             </el-header>
-            <el-container>
-                <el-aside width="200px">
+            <el-container style="height: 100%">
+                <el-aside width="200px" style="height: 100%">
                     <Home></Home>
                 </el-aside>
                 <el-main>
