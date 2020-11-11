@@ -10,6 +10,11 @@ import "vue-awesome/icons";
 import Icon from "vue-awesome/components/Icon";
 import api from "@/api/api";
 
+import layer from 'vue-layer'
+import 'vue-layer/lib/vue-layer.css';
+
+Vue.prototype.$layer = layer(Vue);
+
 Vue.use(ElementUI); //使用elementUI
 Vue.config.productionTip = false;
 Vue.component("icon", Icon);

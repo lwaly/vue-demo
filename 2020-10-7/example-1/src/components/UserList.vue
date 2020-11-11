@@ -105,6 +105,7 @@
 <script>
 import Store from "@/store/store";
 import api from "@/api/api";
+import UserEdit from "@/components/UserEdit";
 
 export default {
     components: {},
@@ -130,14 +131,22 @@ export default {
     destroyed() {},
     methods: {
         handleEdit(index, row) {
+            // this.$layer.showMsg("hello");
             // this.$refs.dialog.visible = true;
-            this.showMsg = true;
-            // 显示确定编辑的弹窗
-            console.log(index);
-            console.log(row);
-            console.log("###");
-            console.log(Store.state.user);
-            console.log("###");
+            this.$layer.iframe({
+                type: 2,
+                title: "编辑",
+                area: ["600px", "450px"],
+                shade: true,
+                offset: "auto",
+                content: {
+                    content: UserEdit, //传递的编辑组件主线
+                    parent: this,
+                    data: {
+                        info: { id: this.id }, // 传递的要编辑内容的id值
+                    },
+                },
+            });
         },
         getSex(val) {
             this.sex = val;
