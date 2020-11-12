@@ -1,14 +1,17 @@
 <template>
     <span class="leables" :class="router == names.path ? 'active' : ''">
-        <router-link :to="names.path">
-            {{ names.meta.title }}
-        </router-link>
+        <router-link :to="names.path"> {{ names.name }} </router-link>
         <i class="el-icon-close" @click="handleClose(names.path)"></i>
     </span>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            nameTab: "用户列表",
+        };
+    },
     props: ["names"],
     methods: {
         handleClose(tag) {

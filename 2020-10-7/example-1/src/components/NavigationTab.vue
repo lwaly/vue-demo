@@ -58,7 +58,7 @@ export default {
             }
         },
         iconsBtns() {
-            Store.commit("tagTables");
+            this.icons = !this.icons;
         },
     },
     components: {
@@ -77,10 +77,13 @@ export default {
             handler(news, olds) {
                 console.log("news", news);
                 console.log("olds", olds);
+
                 if (news.meta.table) {
                     let offs = this.tableList.every((item, index) => {
+                        console.log("every", item.path, news.path);
                         return item.path != news.path;
                     });
+                    console.log("this.tableList", offs, this.tableList);
                     if (offs) {
                         this.tableList.push(news);
                     }
@@ -128,24 +131,26 @@ export default {
     margin-left: 5px;
 }
 .headers-left {
-    width: calc(100% - 300px);
-    min-width: 500px;
+    width: calc(100% - 1px);
 }
 .headers-left-top {
     width: 100%;
     height: 30px;
     font-size: 12px;
     line-height: 30px;
+    text-align: left;
 }
 .headers-left-top i {
     margin-right: 10px;
     cursor: pointer;
     font-size: 16px;
+    text-align: left;
 }
 .headers-left-bottom {
     width: 100%;
     height: 34px;
     font-size: 12px;
     padding-top: 5px;
+    text-align: left;
 }
 </style>

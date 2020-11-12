@@ -21,6 +21,7 @@ const router = new Router({
             meta: {
                 icon: 'el-icon-location',
                 requireAuth: true,
+                table: true,
             },
             children: [
                 {
@@ -32,6 +33,7 @@ const router = new Router({
                         icon: 'el-icon-remove',
                         //meta元素
                         requireAuth: true,
+                        table: true,
                     },
                     children: [
                         {
@@ -41,19 +43,21 @@ const router = new Router({
                             meta: {
                                 icon: 'el-icon-s-marketing',
                                 requireAuth: true,
+                                table: true,
                             },
                             component: UserList,
-                        }, 
+                        },
                         {
-                          path: '/BasicContainer',
-                          name: '用户列表',
-                          showMenu: true,
-                          meta: {
-                              icon: 'el-icon-s-marketing',
-                              requireAuth: true,
-                          },
-                          component: BasicContainer,
-                      },
+                            path: '/BasicContainer',
+                            name: '表单',
+                            showMenu: true,
+                            meta: {
+                                icon: 'el-icon-s-marketing',
+                                requireAuth: true,
+                                table: true,
+                            },
+                            component: BasicContainer,
+                        },
                     ],
                 },
             ],
