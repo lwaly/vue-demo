@@ -131,8 +131,6 @@ export default {
     destroyed() {},
     methods: {
         handleEdit(index, row) {
-            // this.$layer.showMsg("hello");
-            // this.$refs.dialog.visible = true;
             this.$layer.iframe({
                 type: 2,
                 title: "编辑",
@@ -153,7 +151,6 @@ export default {
             console.log("获得的单选框值是：", val, typeof val);
         },
         handleDelete(index, row) {
-            // this.$refs.dialog.visible = true;
             this.showMsg = false;
             // 提示是否确认删除
             console.log(index);
@@ -187,7 +184,6 @@ export default {
             api.postJSON("/MuzenBAS/User/UserFind", parm).then((res) => {
                 console.log(res);
                 if (0 == res.data.code) {
-                    // Store.state.user = res.data.data;
                     this.tableData = res.data.data.data.slice(0, 10);
                     this.totalCount = res.data.data.count;
                     console.log(res.data.data);
@@ -208,7 +204,6 @@ export default {
             }).then((res) => {
                 console.log(res);
                 if (0 == res.data.code) {
-                    // Store.state.user = res.data.data;
                     this.tableData = res.data.data.data.slice(0, 10);
                     this.totalCount = res.data.data.count;
                     console.log(res.data.data);
@@ -220,8 +215,6 @@ export default {
 </script>
 <style lang='scss' scoped>
 .customzie {
-    // @import '@/assets/style/table.scss';
-
     width: 100%;
     height: vh(550);
     .search-box {

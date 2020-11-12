@@ -10,7 +10,7 @@
                 background-color="#545c64"
                 text-color="#fff"
                 active-text-color="#ffd04b"
-                style="height: 100%"
+                style="height: 100%; text-align: left"
             >
                 <el-submenu
                     v-for="item in menu"
@@ -27,6 +27,7 @@
                     >
                         <el-menu-item
                             :index="sub.componentName"
+                            style="text-align: left"
                             v-text="sub.name"
                         >
                         </el-menu-item>
