@@ -1,11 +1,7 @@
 <template>
     <div class="headers">
         <div class="headers-left">
-            <div class="headers-left-top">
-                <i
-                    :class="icons ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
-                    @click="iconsBtns"
-                ></i>
+            <div>
                 {{ router.meta.title }}
             </div>
             <div class="headers-left-bottom">
@@ -101,7 +97,7 @@ export default {
     height: 100%;
     display: flex;
     justify-content: space-between;
-
+    overflow-y: hidden;
     box-sizing: border-box;
 }
 
@@ -132,6 +128,7 @@ export default {
 }
 .headers-left {
     width: calc(100% - 1px);
+    background: #e9e5df;
 }
 .headers-left-top {
     width: 100%;

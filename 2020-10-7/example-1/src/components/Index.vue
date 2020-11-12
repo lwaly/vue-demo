@@ -9,10 +9,12 @@
                     <Home></Home>
                 </el-aside>
                 <el-main>
-                    <el-aside width="100%" style="height: 60px">
+                    <el-aside width="100%" style="height: 30px">
                         <NavigationTab></NavigationTab>
                     </el-aside>
-                    <router-view></router-view>
+                    <div style="padding-top: 25px">
+                        <router-view></router-view>
+                    </div>
                 </el-main>
             </el-container>
         </el-container>
