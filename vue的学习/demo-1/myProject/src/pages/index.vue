@@ -1,3 +1,4 @@
+
 <template>
   <div class="mod-module mod-parallel">
     <div class="img-list type-full">
