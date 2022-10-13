@@ -11,6 +11,7 @@ menus.forEach(item => {
     routes.push({
       path: `/${sub.componentName}`,
       name: sub.componentName,
+      meta: sub.meta,
       component: () => import(`@/pages/${sub.componentName}`)
     });
   });

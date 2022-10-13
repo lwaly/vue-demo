@@ -1,6 +1,6 @@
 <template>
     <div style="">
-        <div class="block">
+        <div class="sf-button block">
             <el-row :span="8" class="tac">
                 <el-col :span="8">
                     <el-radio v-model="radio" label="1">备选项</el-radio>
@@ -28,42 +28,23 @@
                 </el-col>
             </el-row>
         </div>
-        <div class="demo-input-suffix">
-            属性方式：
-            <el-input
-                placeholder="请选择日期"
-                suffix-icon="el-icon-date"
-                v-model="input1"
-                class="sf-button"
-                style="width: 200px"
-            >
-            </el-input>
-            <el-input
-                placeholder="请输入内容"
-                prefix-icon="el-icon-search"
-                v-model="input2"
-                class="sf-button"
-                style="width: 200px"
-            >
-            </el-input>
-            <el-input-number
-                v-model="num"
-                @change="handleChange"
-                :min="1"
-                :max="10"
-                label="描述文字"
-            ></el-input-number>
-            <el-select v-model="value" placeholder="请选择">
-                <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                >
-                </el-option>
-            </el-select>
+        <div class="block">
+            <span class="demonstration">默认</span>
+            <el-date-picker v-model="value1" type="date" placeholder="选择日期">
+            </el-date-picker>
         </div>
         <div class="block">
+            <span class="demonstration">带快捷选项</span>
+            <el-date-picker
+                v-model="value2"
+                align="right"
+                type="date"
+                placeholder="选择日期"
+                :picker-options="pickerOptions"
+            >
+            </el-date-picker>
+        </div>
+        <div class="sf-button block">
             <span class="demonstration">默认 click 触发子菜单</span>
             <el-cascader
                 v-model="value1"
@@ -71,7 +52,7 @@
                 @change="handleChange1"
             ></el-cascader>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <span class="demonstration">hover 触发子菜单</span>
             <el-cascader
                 v-model="value1"
@@ -97,34 +78,34 @@
             >
             </el-switch>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <span class="demonstration">默认</span>
             <el-slider v-model="svalue1"></el-slider>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <span class="demonstration">自定义初始值</span>
             <el-slider v-model="svalue2"></el-slider>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <span class="demonstration">隐藏 Tooltip</span>
             <el-slider v-model="svalue3" :show-tooltip="false"></el-slider>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <span class="demonstration">格式化 Tooltip</span>
             <el-slider
                 v-model="svalue4"
                 :format-tooltip="formatTooltip"
             ></el-slider>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <span class="demonstration">禁用</span>
             <el-slider v-model="svalue5" disabled></el-slider>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <span class="demonstration">禁用1</span>
             <el-slider v-model="svalue5" disabled></el-slider>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <span class="demonstration" style="z-index: -1">禁用2</span>
             <el-slider
                 v-model="svalue5"
@@ -132,16 +113,16 @@
                 style="z-index: -1"
             ></el-slider>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <span class="demonstration">禁用3</span>
             <el-slider v-model="svalue5" disabled></el-slider>
         </div>
-        <div class="block" style="z-index: -1">
+        <div class="sf-button block" style="z-index: -1">
             <span class="demonstration">禁用4</span>
             <el-slider v-model="svalue5" disabled></el-slider>
         </div>
         <div
-            class="block"
+            class="sf-button block"
             style="
                 margin-top: 10px;
                 margin-left: 10px;
@@ -156,7 +137,7 @@
                 disabled
             ></el-slider>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <el-switch
                 v-model="value3"
                 active-text="按月付费"
@@ -165,7 +146,7 @@
             >
             </el-switch>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <el-switch
                 style="display: block margin-top: 10px;
                         margin-left: 10px;
@@ -180,7 +161,7 @@
             >
             </el-switch>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <el-switch
                 style="display: block margin-top: 10px;
                         margin-left: 10px;
@@ -195,7 +176,7 @@
             >
             </el-switch>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <el-switch
                 style="display: block margin-top: 10px;
                         margin-left: 10px;
@@ -210,7 +191,7 @@
             >
             </el-switch>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <el-switch
                 style="display: block margin-top: 10px;
                         margin-left: 10px;
@@ -225,7 +206,7 @@
             >
             </el-switch>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <el-switch
                 style="display: block margin-top: 10px;
                         margin-left: 10px;
@@ -240,7 +221,7 @@
             >
             </el-switch>
         </div>
-        <div class="block">
+        <div class="sf-button block">
             <el-switch
                 style="display: block
                         margin-top: 10px;

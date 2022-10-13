@@ -6,6 +6,9 @@
                 <navmenu></navmenu>
             </el-aside>
             <el-main style="overflow: auto; padding: 0px">
+                <el-aside width="100%" style="height: 30px">
+                    <NavigationTab></NavigationTab>
+                </el-aside>
                 <div
                     style="
                         z-index: -1;
@@ -32,6 +35,7 @@
 import NavMenu from "@/components/NavMenu";
 import Header from "@/components/Header";
 import Bottom from "@/components/Bottom";
+import NavigationTab from "@/components/NavigationTab";
 
 export default {
     name: "app",
@@ -39,6 +43,7 @@ export default {
         navmenu: NavMenu,
         vheader: Header,
         vBottom: Bottom,
+        NavigationTab: NavigationTab,
     },
 };
 </script>
