@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden_hello">
+    <div style="">
         <div class="block">
             <el-row :span="8" class="tac">
                 <el-col :span="8">

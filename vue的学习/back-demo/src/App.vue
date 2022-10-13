@@ -1,26 +1,28 @@
 <template>
     <div id="app" style="height: 100%">
         <el-header class="header"><vheader /></el-header>
-        <el-container style="height: calc( 100% - 60px)">
+        <el-container style="height: calc(100% - 60px)">
             <el-aside width="200px" style="height: 100%">
                 <navmenu></navmenu>
             </el-aside>
-            <el-main>
+            <el-main style="overflow: auto; padding: 0px">
                 <div
-                    style="z-index: -1;
+                    style="
+                        z-index: -1;
                         margin-top: 1px;
                         margin-left: 1px;
                         margin-right: 1px;
                         margin-bottom: 1px;
-                        height: calc( 100% - 1px);
-                        overflow: hidden;"
+                        overflow: hidden;
+                    "
                 >
                     <router-view></router-view>
                 </div>
                 <!-- <div style="padding: 20px;z-index:100;"></div> -->
-                <div class="el-footer1" style="z-index: 99999">
-                    <el-footer style="z-index: 99999"><vBottom /></el-footer>
-                </div>
+                <!-- <div class="el-footer1" style="z-index: 99999"> -->
+                <!-- <div class="body_clear"></div>  -->
+                <el-footer class="el-footer2"><vBottom /></el-footer>
+                <!-- </div> -->
             </el-main>
         </el-container>
     </div>
@@ -49,10 +51,10 @@ export default {
     text-align: left;
 }
 .hidden_hello {
-    height: calc( 100% - 60px) !important;
+    height: calc(100% - 60px);
     width: 100%;
     background-color: #fff;
-    overflow: auto !important;
+    overflow: hidden;
     margin: 10px;
 }
 .body_clear {
@@ -61,16 +63,28 @@ export default {
 .el-footer1 {
     background-color: #fff;
     color: rgb(27, 25, 25);
-    bottom: 30px;
-    position: absolute;
-    bottom: 0;
+    bottom: 0px;
+    position: sticky;
     width: 100%;
     text-align: center;
-    height: 60px !important;
+    height: 60px;
     line-height: 60px;
     z-index: 100;
 }
-.el-main{
+
+.el-footer2 {
+    background-color: #fff;
+    color: rgb(27, 25, 25);
+    bottom: 0px;
+    position: sticky;
+    width: 100%;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    z-index: 9900;
+}
+
+.el-main {
     height: 100%;
     position: relative;
 }

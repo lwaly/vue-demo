@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden_hello">
+    <div style="overflow: inherit;">
         <div v-for="index of 20" :key="index">
             <el-switch
                 style="
