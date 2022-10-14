@@ -20,7 +20,7 @@ const router = new Router({
             component: Index,
             meta: {
                 icon: 'el-icon-location',
-                requireAuth: true,
+                requireAuth: false,
                 table: true,
             },
             children: [
@@ -32,7 +32,7 @@ const router = new Router({
                     meta: {
                         icon: 'el-icon-remove',
                         //meta元素
-                        requireAuth: true,
+                        requireAuth: false,
                         table: true,
                     },
                     children: [
@@ -42,7 +42,7 @@ const router = new Router({
                             showMenu: true,
                             meta: {
                                 icon: 'el-icon-s-marketing',
-                                requireAuth: true,
+                                requireAuth: false,
                                 table: true,
                             },
                             component: UserList,
@@ -53,7 +53,7 @@ const router = new Router({
                             showMenu: true,
                             meta: {
                                 icon: 'el-icon-s-marketing',
-                                requireAuth: true,
+                                requireAuth: false,
                                 table: true,
                             },
                             component: BasicContainer,
