@@ -56,5 +56,34 @@ module.exports = [
         },
       }
     ]
+  },
+  {
+    name: "数据可视化",
+    id: "data-vis",
+    meta: {
+      icon: 'el-icon-location',
+      requireAuth: false,
+      table: true,
+    },
+    sub: [
+      {
+        name: "时间周期",
+        componentName: "StockDate",
+        meta: {
+          icon: 'el-icon-location',
+          requireAuth: false,
+          table: true,
+        },
+      },
+      {
+        name: "多个图表",
+        componentName: "StockDateMulti",
+        meta: {
+          icon: 'el-icon-location',
+          requireAuth: false,
+          table: true,
+        },
+      }
+    ]
   }
 ];
